@@ -1,0 +1,229 @@
+{
+  "": {
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/primary.swiftdeps"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/App/AppState.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AppState.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AppState.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AppState~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AppState.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AppState.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/App/VaultMasterApp.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultMasterApp.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultMasterApp.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultMasterApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultMasterApp.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultMasterApp.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Models/CustomField.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CustomField.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CustomField.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CustomField~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CustomField.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CustomField.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Models/Folder.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Folder.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Folder.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Folder~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Folder.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Folder.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Models/ItemCategory.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemCategory.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemCategory.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemCategory~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemCategory.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemCategory.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Models/Tag.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Tag.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Tag.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Tag~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Tag.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Tag.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Models/VaultItem.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultItem.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultItem.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultItem~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultItem.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultItem.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Security/BiometricManager.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/BiometricManager.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/BiometricManager.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/BiometricManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/BiometricManager.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/BiometricManager.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Security/CryptoEngine.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CryptoEngine.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CryptoEngine.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CryptoEngine~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CryptoEngine.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CryptoEngine.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Security/KeyDerivation.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/KeyDerivation.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/KeyDerivation.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/KeyDerivation~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/KeyDerivation.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/KeyDerivation.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Security/KeychainHelper.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/KeychainHelper.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/KeychainHelper.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/KeychainHelper~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/KeychainHelper.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/KeychainHelper.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Security/VaultStorage.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultStorage.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultStorage.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultStorage~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultStorage.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultStorage.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Utilities/AutoLockMonitor.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AutoLockMonitor.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AutoLockMonitor.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AutoLockMonitor~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AutoLockMonitor.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AutoLockMonitor.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Utilities/Extensions/Color+Hex.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Color+Hex.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Color+Hex.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Color+Hex~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Color+Hex.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/Color+Hex.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/ViewModels/AuthViewModel.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AuthViewModel.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AuthViewModel.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AuthViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AuthViewModel.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/AuthViewModel.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/ViewModels/GeneratorViewModel.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/GeneratorViewModel.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/GeneratorViewModel.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/GeneratorViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/GeneratorViewModel.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/GeneratorViewModel.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/ViewModels/VaultViewModel.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultViewModel.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultViewModel.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultViewModel.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/VaultViewModel.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Auth/LockView.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/LockView.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/LockView.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/LockView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/LockView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/LockView.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Auth/SetupMasterPasswordView.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/SetupMasterPasswordView.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/SetupMasterPasswordView.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/SetupMasterPasswordView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/SetupMasterPasswordView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/SetupMasterPasswordView.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Auth/Styles/CyberTitaniumLockView.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CyberTitaniumLockView.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CyberTitaniumLockView.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CyberTitaniumLockView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CyberTitaniumLockView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CyberTitaniumLockView.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Auth/Styles/ElegantStudioLockView.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ElegantStudioLockView.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ElegantStudioLockView.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ElegantStudioLockView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ElegantStudioLockView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ElegantStudioLockView.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Auth/Styles/GlassmorphismLockView.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/GlassmorphismLockView.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/GlassmorphismLockView.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/GlassmorphismLockView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/GlassmorphismLockView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/GlassmorphismLockView.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Auth/Styles/LockScreenStyle.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/LockScreenStyle.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/LockScreenStyle.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/LockScreenStyle~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/LockScreenStyle.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/LockScreenStyle.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Components/ConcealedSecureField.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ConcealedSecureField.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ConcealedSecureField.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ConcealedSecureField~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ConcealedSecureField.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ConcealedSecureField.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Components/CustomFieldEditor.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CustomFieldEditor.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CustomFieldEditor.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CustomFieldEditor~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CustomFieldEditor.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/CustomFieldEditor.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Components/TagSelectorView.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/TagSelectorView.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/TagSelectorView.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/TagSelectorView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/TagSelectorView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/TagSelectorView.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Generator/PasswordGeneratorSheet.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/PasswordGeneratorSheet.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/PasswordGeneratorSheet.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/PasswordGeneratorSheet~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/PasswordGeneratorSheet.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/PasswordGeneratorSheet.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Main/ItemDetailView.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemDetailView.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemDetailView.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemDetailView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemDetailView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemDetailView.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Main/ItemListView.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemListView.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemListView.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemListView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemListView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/ItemListView.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Main/MainSplitView.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/MainSplitView.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/MainSplitView.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/MainSplitView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/MainSplitView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/MainSplitView.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/Main/SidebarView.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/SidebarView.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/SidebarView.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/SidebarView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/SidebarView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/SidebarView.dia"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/Sources/VaultMaster/Views/MenuBar/MenuBarPopoverView.swift": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/MenuBarPopoverView.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/MenuBarPopoverView.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/MenuBarPopoverView~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/MenuBarPopoverView.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/debug/VaultMaster.build/MenuBarPopoverView.dia"
+  }
+}

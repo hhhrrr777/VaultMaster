@@ -1,0 +1,13 @@
+{
+  "": {
+    "dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/release/VaultMasterPackageTests.build/VaultMasterPackageTests.d",
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/release/VaultMasterPackageTests.build/VaultMasterPackageTests.o",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/release/VaultMasterPackageTests.build/primary.swiftdeps"
+  },
+  "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/release/VaultMasterPackageTests.derived/runner.swift": {
+    "object": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/release/VaultMasterPackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/release/VaultMasterPackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/release/VaultMasterPackageTests.build/runner.swiftdeps",
+    "diagnostics": "/Users/macbookpro/File/Project/demo/drive/.build/arm64-apple-macosx/release/VaultMasterPackageTests.build/runner.dia"
+  }
+}
