@@ -343,7 +343,7 @@ public struct ItemDetailView: View {
                 appState.startCreatingItem(category: .login)
             } label: {
                 Label("新建资产项目", systemImage: "plus.circle.fill")
-                    .font(.subheadline.bold())
+                    .font(.body)
             }
             .buttonStyle(.bordered)
             .padding(.top, 4)
