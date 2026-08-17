@@ -422,191 +422,117 @@ public struct ItemDetailView: View {
         }
     }
 
-    // 2. API Key 专属字段 (直接输入，不包含密码自动生成器)
+    // 2. API Key 专属字段
     @ViewBuilder
     private var apiKeyFieldsView: some View {
-        VStack(spacing: 14) {
-            fieldRow(title: "Key ID / Client ID", value: $draftPayload.keyId, placeholder: "ak_live_xxxxxxxx")
-            fieldRow(title: "Secret / API Key", value: $draftPayload.apiKeySecret, placeholder: "sk_live_xxxxxxxx")
-            fieldRow(title: "Endpoint API 接口地址", value: $draftPayload.endpoint, placeholder: "https://api.openai.com/v1", isUrl: true)
-            fieldRow(title: "自定义 Header / 配置", value: $draftPayload.customHeaders, placeholder: "Bearer Token...")
-            notesFieldView
+        VStack(spacing: 16) {
+            AppleCardSection(title: "API 凭据与密钥", icon: "key.fill", iconColor: .orange) {
+                CardFieldRow(label: "Key ID", value: $draftPayload.keyId, placeholder: "ak_live_xxxxxxxx", isEditing: isEditing, isMonospaced: true, showDivider: true)
+                CardSecureRow(label: "Secret Key", text: $draftPayload.apiKeySecret, placeholder: "sk_live_xxxxxxxx", isEditing: isEditing, showStrength: false, showDivider: false)
+            }
+
+            AppleCardSection(title: "接口与网络配置", icon: "network", iconColor: .blue) {
+                CardFieldRow(label: "Endpoint 地址", value: $draftPayload.endpoint, placeholder: "https://api.openai.com/v1", isEditing: isEditing, isUrl: true, showDivider: true)
+                CardFieldRow(label: "自定义 Headers", value: $draftPayload.customHeaders, placeholder: "Bearer Token 或额外参数", isEditing: isEditing, isMonospaced: true, showDivider: false)
+            }
+
+            SecureNotesCardView(notes: $draftPayload.notes, isEditing: isEditing)
         }
     }
 
     // 3. 开发凭据专属字段 (SSH / 数据库 / 云服务 / Access Token)
     @ViewBuilder
     private var devCredentialFieldsView: some View {
-        VStack(spacing: 14) {
-            fieldRow(title: "凭据类型 / 协议", value: $draftPayload.credentialType, placeholder: "SSH / MySQL / PostgreSQL / Redis / AWS / GitHub Token")
-            HStack(spacing: 14) {
-                fieldRow(title: "服务器主机 / IP 地址", value: $draftPayload.host, placeholder: "192.168.1.100 或 db.example.com")
-                fieldRow(title: "端口号", value: $draftPayload.port, placeholder: "22 / 3306 / 6379")
+        VStack(spacing: 16) {
+            AppleCardSection(title: "服务器与连接", icon: "server.rack", iconColor: .indigo) {
+                CardFieldRow(label: "凭据类型", value: $draftPayload.credentialType, placeholder: "SSH / MySQL / PostgreSQL / Redis / AWS", isEditing: isEditing, showDivider: true)
+                CardFieldRow(label: "主机 / IP", value: $draftPayload.host, placeholder: "192.168.1.100 或 db.example.com", isEditing: isEditing, isMonospaced: true, showDivider: true)
+                CardFieldRow(label: "端口号", value: $draftPayload.port, placeholder: "22 / 3306 / 6379", isEditing: isEditing, isMonospaced: true, showDivider: false)
             }
-            fieldRow(title: "用户名 / 账户", value: $draftPayload.username, placeholder: "root / ubuntu / admin")
-            ConcealedSecureField(
-                title: "密码 / 私钥 / Access Token",
-                text: $draftPayload.privateKeyOrToken,
-                placeholder: "请输入或粘贴敏感凭据内容",
-                isEditable: isEditing,
-                onGeneratePassword: {
+
+            AppleCardSection(title: "认证与敏感凭据", icon: "lock.shield.fill", iconColor: .purple) {
+                CardFieldRow(label: "账户 / 用户名", value: $draftPayload.username, placeholder: "root / ubuntu / admin", isEditing: isEditing, showDivider: true)
+                CardSecureRow(label: "密码 / 私钥", text: $draftPayload.privateKeyOrToken, placeholder: "请输入或粘贴敏感密码/私钥/Token", isEditing: isEditing, showStrength: true, showDivider: false) {
                     showingPasswordGenerator = true
                 }
-            )
-            notesFieldView
+            }
+
+            SecureNotesCardView(notes: $draftPayload.notes, isEditing: isEditing)
         }
     }
 
     // 4. 银行卡专属字段
     @ViewBuilder
     private var paymentCardFieldsView: some View {
-        VStack(spacing: 14) {
-            fieldRow(title: "持卡人姓名", value: $draftPayload.cardholderName, placeholder: "ZHANG SAN")
-            fieldRow(title: "银行卡号", value: $draftPayload.cardNumber, placeholder: "6222 0000 0000 0000")
-            HStack(spacing: 14) {
-                fieldRow(title: "卡片类型", value: $draftPayload.cardType, placeholder: "Visa / Mastercard / 银联")
-                fieldRow(title: "发卡银行", value: $draftPayload.bankName, placeholder: "招商银行 / 建设银行")
+        VStack(spacing: 16) {
+            AppleCardSection(title: "卡片基础信息", icon: "creditcard.fill", iconColor: .green) {
+                CardFieldRow(label: "持卡人姓名", value: $draftPayload.cardholderName, placeholder: "ZHANG SAN", isEditing: isEditing, showDivider: true)
+                CardFieldRow(label: "银行卡号", value: $draftPayload.cardNumber, placeholder: "6222 0000 0000 0000", isEditing: isEditing, isMonospaced: true, showDivider: true)
+                CardFieldRow(label: "卡片类型", value: $draftPayload.cardType, placeholder: "Visa / Mastercard / 银联", isEditing: isEditing, showDivider: true)
+                CardFieldRow(label: "发卡银行", value: $draftPayload.bankName, placeholder: "招商银行 / 工商银行 / 建设银行", isEditing: isEditing, showDivider: false)
             }
-            HStack(spacing: 14) {
-                fieldRow(title: "有效期 (MM/YY)", value: $draftPayload.expiryDate, placeholder: "12/28")
-                ConcealedSecureField(title: "CVV / 安全码", text: $draftPayload.cvv, placeholder: "888", isEditable: isEditing)
-                ConcealedSecureField(title: "取款 PIN 码", text: $draftPayload.pin, placeholder: "6 位密码", isEditable: isEditing)
+
+            AppleCardSection(title: "安全验证信息", icon: "shield.lefthalf.filled", iconColor: .teal) {
+                CardFieldRow(label: "有效期 (MM/YY)", value: $draftPayload.expiryDate, placeholder: "12/28", isEditing: isEditing, isMonospaced: true, showDivider: true)
+                CardSecureRow(label: "CVV / 安全码", text: $draftPayload.cvv, placeholder: "888", isEditing: isEditing, showStrength: false, showDivider: true)
+                CardSecureRow(label: "取款 PIN 码", text: $draftPayload.pin, placeholder: "6 位数字密码", isEditing: isEditing, showStrength: false, showDivider: false)
             }
-            notesFieldView
+
+            SecureNotesCardView(notes: $draftPayload.notes, isEditing: isEditing)
         }
     }
 
     // 5. 身份信息专属字段
     @ViewBuilder
     private var identityFieldsView: some View {
-        VStack(spacing: 14) {
-            fieldRow(title: "姓名", value: $draftPayload.fullName, placeholder: "张三")
-            fieldRow(title: "证件类型", value: $draftPayload.documentType, placeholder: "身份证 / 护照 / 驾照")
-            fieldRow(title: "证件号码", value: $draftPayload.idNumber, placeholder: "110101199003072345")
-            HStack(spacing: 14) {
-                fieldRow(title: "颁发日期", value: $draftPayload.issueDate, placeholder: "2020-01-01")
-                fieldRow(title: "过期日期", value: $draftPayload.expirationDate, placeholder: "2030-01-01")
+        VStack(spacing: 16) {
+            AppleCardSection(title: "证件基本信息", icon: "person.text.rectangle.fill", iconColor: .purple) {
+                CardFieldRow(label: "姓名", value: $draftPayload.fullName, placeholder: "张三", isEditing: isEditing, showDivider: true)
+                CardFieldRow(label: "证件类型", value: $draftPayload.documentType, placeholder: "身份证 / 护照 / 驾照 / 港澳通行证", isEditing: isEditing, showDivider: true)
+                CardFieldRow(label: "证件号码", value: $draftPayload.idNumber, placeholder: "110101199003072345", isEditing: isEditing, isMonospaced: true, showDivider: false)
             }
-            fieldRow(title: "签发机关", value: $draftPayload.issuingAuthority, placeholder: "北京市公安局")
-            notesFieldView
+
+            AppleCardSection(title: "签发与有效期", icon: "calendar.badge.clock", iconColor: .orange) {
+                CardFieldRow(label: "颁发日期", value: $draftPayload.issueDate, placeholder: "2020-01-01", isEditing: isEditing, showDivider: true)
+                CardFieldRow(label: "过期日期", value: $draftPayload.expirationDate, placeholder: "2030-01-01", isEditing: isEditing, showDivider: true)
+                CardFieldRow(label: "签发机关", value: $draftPayload.issuingAuthority, placeholder: "北京市公安局 / 移民管理局", isEditing: isEditing, showDivider: false)
+            }
+
+            SecureNotesCardView(notes: $draftPayload.notes, isEditing: isEditing)
         }
     }
 
     // 6. 安全便签专属字段
     @ViewBuilder
     private var secureNoteFieldsView: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("加密便签内容")
-                .font(.caption)
-                .fontWeight(.semibold)
-                .foregroundColor(.secondary)
-
-            if isEditing {
-                TextEditor(text: $draftPayload.notes)
-                    .font(.system(.body, design: .monospaced))
-                    .frame(minHeight: 180)
-                    .padding(6)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color(nsColor: .controlBackgroundColor))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.primary.opacity(0.12), lineWidth: 1)
-                            )
-                    )
-            } else {
-                Text(draftPayload.notes.isEmpty ? "（暂无便签内容）" : draftPayload.notes)
-                    .font(.system(.body, design: .monospaced))
-                    .foregroundColor(draftPayload.notes.isEmpty ? .secondary : .primary)
-                    .textSelection(.enabled)
-                    .padding(12)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color(nsColor: .controlBackgroundColor).opacity(0.5))
-                    )
-            }
-        }
-    }
-
-    // 备注通用字段
-    @ViewBuilder
-    private var notesFieldView: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("备注信息")
-                .font(.caption)
-                .fontWeight(.semibold)
-                .foregroundColor(.secondary)
-
-            if isEditing {
-                TextEditor(text: $draftPayload.notes)
-                    .frame(minHeight: 70)
-                    .padding(4)
-                    .background(
-                        RoundedRectangle(cornerRadius: 6)
-                            .stroke(Color.primary.opacity(0.12), lineWidth: 1)
-                    )
-            } else {
-                if !draftPayload.notes.isEmpty {
-                    Text(draftPayload.notes)
-                        .font(.subheadline)
-                        .textSelection(.enabled)
-                        .padding(8)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Color(nsColor: .controlBackgroundColor).opacity(0.4))
-                        .cornerRadius(6)
-                }
-            }
-        }
-    }
-
-    // 通用字段行
-    @ViewBuilder
-    private func fieldRow(title: String, value: Binding<String>, placeholder: String, isUrl: Bool = false) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(title)
-                .font(.caption)
-                .fontWeight(.semibold)
-                .foregroundColor(.secondary)
-
-            HStack(spacing: 8) {
+        AppleCardSection(title: "加密便签内容", icon: "note.text", iconColor: .yellow) {
+            VStack(alignment: .leading, spacing: 0) {
                 if isEditing {
-                    TextField(placeholder, text: value)
-                        .textFieldStyle(.roundedBorder)
+                    TextEditor(text: $draftPayload.notes)
+                        .font(.system(.body, design: .monospaced))
+                        .frame(minHeight: 180)
+                        .padding(10)
+                        .background(Color.clear)
                 } else {
-                    Text(value.wrappedValue.isEmpty ? "（未填写）" : value.wrappedValue)
-                        .font(.body)
-                        .foregroundColor(value.wrappedValue.isEmpty ? .secondary : .primary)
-                        .textSelection(.enabled)
-                    
-                    Spacer()
-
-                    if isUrl && !value.wrappedValue.isEmpty, let url = URL(string: value.wrappedValue) {
-                        Button {
-                            NSWorkspace.shared.open(url)
-                        } label: {
-                            Image(systemName: "arrow.up.right.square")
-                                .foregroundColor(.accentColor)
-                        }
-                        .buttonStyle(.plain)
-                        .help("在浏览器中打开")
-                    }
-
-                    if !value.wrappedValue.isEmpty {
-                        Button {
-                            NSPasteboard.general.clearContents()
-                            NSPasteboard.general.setString(value.wrappedValue, forType: .string)
-                        } label: {
-                            Image(systemName: "doc.on.doc")
-                                .foregroundColor(.secondary)
-                        }
-                        .buttonStyle(.plain)
-                        .help("复制内容")
+                    if draftPayload.notes.isEmpty {
+                        Text("（暂无加密便签内容）")
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundColor(.secondary)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 14)
+                    } else {
+                        Text(draftPayload.notes)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundColor(.primary)
+                            .textSelection(.enabled)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 14)
                     }
                 }
             }
         }
     }
+
 
     // 底部信息
     @ViewBuilder
