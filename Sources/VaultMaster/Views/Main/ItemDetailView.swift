@@ -64,7 +64,12 @@ public struct ItemDetailView: View {
         }
         .sheet(isPresented: $showingPasswordGenerator) {
             PasswordGeneratorSheet { newPassword in
-                draftPayload.password = newPassword
+                let currentCategory = appState.isCreatingNewItem ? appState.creatingCategory : (currentItem?.category ?? .login)
+                if currentCategory == .devCredential {
+                    draftPayload.privateKeyOrToken = newPassword
+                } else {
+                    draftPayload.password = newPassword
+                }
             }
         }
     }
@@ -124,7 +129,7 @@ public struct ItemDetailView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    TextField("输入资产标题 (如: 个人邮箱 / 公司服务器 / 招行信用卡)", text: Binding(
+                    TextField(appState.creatingCategory == .login ? "输入网站或应用名称 (如: GitHub / Google / ChatGPT)" : "输入资产标题 (如: 个人邮箱 / 公司服务器 / 招行信用卡)", text: Binding(
                         get: { draftItem?.title ?? "" },
                         set: { draftItem?.title = $0 }
                     ))
@@ -375,6 +380,8 @@ public struct ItemDetailView: View {
             loginFieldsView
         case .apiKey:
             apiKeyFieldsView
+        case .devCredential:
+            devCredentialFieldsView
         case .paymentCard:
             paymentCardFieldsView
         case .identity:
@@ -384,23 +391,34 @@ public struct ItemDetailView: View {
         }
     }
 
-    // 1. 网站登录专属字段
+    // 1. 网站与应用专属字段 (Apple 原生毛玻璃卡片风格)
     @ViewBuilder
     private var loginFieldsView: some View {
-        VStack(spacing: 14) {
-            fieldRow(title: "网址 (URL)", value: $draftPayload.url, placeholder: "https://example.com", isUrl: true)
-            fieldRow(title: "用户名 / 邮箱", value: $draftPayload.username, placeholder: "username@example.com")
-            ConcealedSecureField(
-                title: "登录密码",
-                text: $draftPayload.password,
-                placeholder: "请输入密码",
-                isEditable: isEditing,
-                onGeneratePassword: {
+        VStack(spacing: 16) {
+            LoginCredentialsCardView(
+                username: $draftPayload.username,
+                email: $draftPayload.email,
+                password: $draftPayload.password,
+                isEditing: isEditing,
+                onOpenGenerator: {
                     showingPasswordGenerator = true
                 }
             )
-            fieldRow(title: "双重认证 (2FA / TOTP 秘钥)", value: $draftPayload.totpSecret, placeholder: "JBSWY3DPEHPK3PXP")
-            notesFieldView
+
+            WebAddressCardView(
+                urlString: $draftPayload.url,
+                isEditing: isEditing
+            )
+
+            TOTPCardView(
+                totpSecret: $draftPayload.totpSecret,
+                isEditing: isEditing
+            )
+
+            SecureNotesCardView(
+                notes: $draftPayload.notes,
+                isEditing: isEditing
+            )
         }
     }
 
@@ -416,7 +434,30 @@ public struct ItemDetailView: View {
         }
     }
 
-    // 3. 银行卡专属字段
+    // 3. 开发凭据专属字段 (SSH / 数据库 / 云服务 / Access Token)
+    @ViewBuilder
+    private var devCredentialFieldsView: some View {
+        VStack(spacing: 14) {
+            fieldRow(title: "凭据类型 / 协议", value: $draftPayload.credentialType, placeholder: "SSH / MySQL / PostgreSQL / Redis / AWS / GitHub Token")
+            HStack(spacing: 14) {
+                fieldRow(title: "服务器主机 / IP 地址", value: $draftPayload.host, placeholder: "192.168.1.100 或 db.example.com")
+                fieldRow(title: "端口号", value: $draftPayload.port, placeholder: "22 / 3306 / 6379")
+            }
+            fieldRow(title: "用户名 / 账户", value: $draftPayload.username, placeholder: "root / ubuntu / admin")
+            ConcealedSecureField(
+                title: "密码 / 私钥 / Access Token",
+                text: $draftPayload.privateKeyOrToken,
+                placeholder: "请输入或粘贴敏感凭据内容",
+                isEditable: isEditing,
+                onGeneratePassword: {
+                    showingPasswordGenerator = true
+                }
+            )
+            notesFieldView
+        }
+    }
+
+    // 4. 银行卡专属字段
     @ViewBuilder
     private var paymentCardFieldsView: some View {
         VStack(spacing: 14) {
@@ -435,7 +476,7 @@ public struct ItemDetailView: View {
         }
     }
 
-    // 4. 身份信息专属字段
+    // 5. 身份信息专属字段
     @ViewBuilder
     private var identityFieldsView: some View {
         VStack(spacing: 14) {
@@ -451,7 +492,7 @@ public struct ItemDetailView: View {
         }
     }
 
-    // 5. 安全便签专属字段
+    // 6. 安全便签专属字段
     @ViewBuilder
     private var secureNoteFieldsView: some View {
         VStack(alignment: .leading, spacing: 8) {

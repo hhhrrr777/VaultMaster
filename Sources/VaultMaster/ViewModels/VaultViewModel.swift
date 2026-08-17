@@ -227,16 +227,19 @@ public final class VaultViewModel: ObservableObject {
             result = result.filter { $0.isTrash }
         }
 
-        // 2. 搜索框文本匹配 (匹配标题、用户名、URL、备注等)
+        // 2. 搜索框文本匹配 (匹配标题、用户名、邮箱、URL、备注等)
         if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             let query = searchText.lowercased()
             result = result.filter { item in
                 if item.title.lowercased().contains(query) { return true }
                 if let payload = decryptedPayloads[item.id] {
                     if payload.username.lowercased().contains(query) { return true }
+                    if payload.email.lowercased().contains(query) { return true }
                     if payload.url.lowercased().contains(query) { return true }
                     if payload.notes.lowercased().contains(query) { return true }
                     if payload.keyId.lowercased().contains(query) { return true }
+                    if payload.credentialType.lowercased().contains(query) { return true }
+                    if payload.host.lowercased().contains(query) { return true }
                     if payload.cardholderName.lowercased().contains(query) { return true }
                     if payload.fullName.lowercased().contains(query) { return true }
                 }

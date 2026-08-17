@@ -24,7 +24,12 @@ public struct MenuBarPopoverView: View {
         return all.filter { item in
             if item.title.lowercased().contains(q) { return true }
             let payload = vaultVM.getPayload(for: item)
-            return payload.username.lowercased().contains(q) || payload.url.lowercased().contains(q)
+            return payload.username.lowercased().contains(q) ||
+                   payload.email.lowercased().contains(q) ||
+                   payload.url.lowercased().contains(q) ||
+                   payload.host.lowercased().contains(q) ||
+                   payload.keyId.lowercased().contains(q) ||
+                   payload.credentialType.lowercased().contains(q)
         }
     }
 
@@ -192,8 +197,8 @@ public struct MenuBarPopoverView: View {
 
             Spacer()
 
-            // 快捷复制密码
-            let pass = payload.password.isEmpty ? payload.apiKeySecret : payload.password
+            // 快捷复制密码 / 秘钥 / 凭据
+            let pass = !payload.password.isEmpty ? payload.password : (!payload.apiKeySecret.isEmpty ? payload.apiKeySecret : payload.privateKeyOrToken)
             if !pass.isEmpty {
                 Button {
                     copyValue(pass, itemId: item.id)
@@ -203,11 +208,11 @@ public struct MenuBarPopoverView: View {
                         .foregroundColor(copiedItemId == item.id ? .green : .accentColor)
                 }
                 .buttonStyle(.plain)
-                .help("复制密码")
+                .help("复制密码/秘钥")
             }
 
-            // 快捷复制用户名
-            let user = payload.username.isEmpty ? payload.keyId : payload.username
+            // 快捷复制用户名 / 主机
+            let user = !payload.username.isEmpty ? payload.username : (!payload.keyId.isEmpty ? payload.keyId : payload.host)
             if !user.isEmpty {
                 Button {
                     copyValue(user, itemId: item.id)
@@ -217,7 +222,7 @@ public struct MenuBarPopoverView: View {
                         .foregroundColor(.secondary)
                 }
                 .buttonStyle(.plain)
-                .help("复制用户名")
+                .help("复制用户名/主机")
             }
         }
         .padding(.horizontal, 8)

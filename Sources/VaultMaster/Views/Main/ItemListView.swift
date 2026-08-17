@@ -207,6 +207,27 @@ public struct ItemListView: View {
                 }
             }
 
+            // 复制开发凭据 / 私钥 / Token
+            if !payload.privateKeyOrToken.isEmpty {
+                Button {
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(payload.privateKeyOrToken, forType: .string)
+                } label: {
+                    Label("复制凭据 / 私钥", systemImage: "terminal.fill")
+                }
+            }
+
+            // 复制主机地址
+            if !payload.host.isEmpty {
+                Button {
+                    let hostStr = payload.port.isEmpty ? payload.host : "\(payload.host):\(payload.port)"
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(hostStr, forType: .string)
+                } label: {
+                    Label("复制主机地址", systemImage: "server.rack")
+                }
+            }
+
             // 复制用户名
             if !payload.username.isEmpty {
                 Button {
@@ -214,6 +235,16 @@ public struct ItemListView: View {
                     NSPasteboard.general.setString(payload.username, forType: .string)
                 } label: {
                     Label("复制用户名", systemImage: "person.fill")
+                }
+            }
+
+            // 复制邮箱
+            if !payload.email.isEmpty {
+                Button {
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(payload.email, forType: .string)
+                } label: {
+                    Label("复制邮箱", systemImage: "envelope.fill")
                 }
             }
 
