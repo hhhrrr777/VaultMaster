@@ -11,6 +11,9 @@ public struct SidebarView: View {
     @State private var newTagName: String = ""
     @State private var showingSettingsSheet: Bool = false
 
+    @State private var folderPendingDelete: Folder? = nil
+    @State private var tagPendingDelete: Tag? = nil
+
     public init(appState: AppState, vaultVM: VaultViewModel) {
         self.appState = appState
         self.vaultVM = vaultVM
@@ -105,7 +108,7 @@ public struct SidebarView: View {
                     }
                     .contextMenu {
                         Button(role: .destructive) {
-                            vaultVM.deleteFolder(folder)
+                            folderPendingDelete = folder
                         } label: {
                             Label("删除文件夹", systemImage: "trash")
                         }
@@ -146,7 +149,7 @@ public struct SidebarView: View {
                     }
                     .contextMenu {
                         Button(role: .destructive) {
-                            vaultVM.deleteTag(tag)
+                            tagPendingDelete = tag
                         } label: {
                             Label("删除标签", systemImage: "trash")
                         }
@@ -169,6 +172,7 @@ public struct SidebarView: View {
             }
         }
         .listStyle(.sidebar)
+        .disableListTypeSelect()
         .frame(minWidth: 200, idealWidth: 220)
         .safeAreaInset(edge: .bottom) {
             bottomControlBar
@@ -192,6 +196,46 @@ public struct SidebarView: View {
                     vaultVM.addTag(name: newTagName)
                 }
             }
+        }
+        // 删除文件夹确认弹窗
+        .alert(
+            "确定要删除文件夹「\(folderPendingDelete?.name ?? "")」吗？",
+            isPresented: Binding(
+                get: { folderPendingDelete != nil },
+                set: { if !$0 { folderPendingDelete = nil } }
+            )
+        ) {
+            Button("取消", role: .cancel) {
+                folderPendingDelete = nil
+            }
+            Button("删除文件夹", role: .destructive) {
+                if let folder = folderPendingDelete {
+                    vaultVM.deleteFolder(folder)
+                    folderPendingDelete = nil
+                }
+            }
+        } message: {
+            Text("文件夹被删除后，其中的资产项目仍会保留在金库中，但不再归属于该文件夹。")
+        }
+        // 删除标签确认弹窗
+        .alert(
+            "确定要删除标签「\(tagPendingDelete?.name ?? "")」吗？",
+            isPresented: Binding(
+                get: { tagPendingDelete != nil },
+                set: { if !$0 { tagPendingDelete = nil } }
+            )
+        ) {
+            Button("取消", role: .cancel) {
+                tagPendingDelete = nil
+            }
+            Button("删除标签", role: .destructive) {
+                if let tag = tagPendingDelete {
+                    vaultVM.deleteTag(tag)
+                    tagPendingDelete = nil
+                }
+            }
+        } message: {
+            Text("标签被删除后，将从所有已关联的资产项目中移除。")
         }
         // 设置弹窗
         .sheet(isPresented: $showingSettingsSheet) {
