@@ -17,7 +17,8 @@ final class VaultItemModelTests: XCTestCase {
         // 1. 网站登录测试
         var loginItem = VaultItem(title: "Google Account", category: .login)
         var loginPayload = VaultItemPayload(
-            username: "alex@gmail.com",
+            username: "alex",
+            email: "alex@gmail.com",
             password: "SuperSecretPassword123!",
             url: "https://accounts.google.com",
             totpSecret: "JBSWY3DPEHPK3PXP",
@@ -29,7 +30,8 @@ final class VaultItemModelTests: XCTestCase {
         XCTAssertFalse(loginItem.encryptedPayloadBase64.isEmpty)
 
         let decryptedLogin = try loginItem.decryptPayload(using: masterKey, engine: engine)
-        XCTAssertEqual(decryptedLogin.username, "alex@gmail.com")
+        XCTAssertEqual(decryptedLogin.username, "alex")
+        XCTAssertEqual(decryptedLogin.email, "alex@gmail.com")
         XCTAssertEqual(decryptedLogin.password, "SuperSecretPassword123!")
         XCTAssertEqual(decryptedLogin.url, "https://accounts.google.com")
         XCTAssertEqual(decryptedLogin.customFields.count, 1)
@@ -46,7 +48,21 @@ final class VaultItemModelTests: XCTestCase {
         let decryptedApiKey = try apiKeyItem.decryptPayload(using: masterKey, engine: engine)
         XCTAssertEqual(decryptedApiKey.apiKeySecret, "sk-proj-abc123xyz789")
 
-        // 3. 银行卡测试
+        // 3. 开发凭据测试
+        var devItem = VaultItem(title: "Production DB", category: .devCredential)
+        let devPayload = VaultItemPayload(
+            credentialType: "MySQL",
+            host: "db.production.internal",
+            port: "3306",
+            privateKeyOrToken: "super_secure_db_pass_9988"
+        )
+        try devItem.encryptPayload(devPayload, using: masterKey, engine: engine)
+        let decryptedDev = try devItem.decryptPayload(using: masterKey, engine: engine)
+        XCTAssertEqual(decryptedDev.host, "db.production.internal")
+        XCTAssertEqual(decryptedDev.port, "3306")
+        XCTAssertEqual(decryptedDev.privateKeyOrToken, "super_secure_db_pass_9988")
+
+        // 4. 银行卡测试
         var cardItem = VaultItem(title: "Chase Sapphire", category: .paymentCard)
         let cardPayload = VaultItemPayload(
             cardNumber: "4111222233334444",
@@ -65,8 +81,8 @@ final class VaultItemModelTests: XCTestCase {
 
     func testSubtitlePreviewFormatting() {
         let item1 = VaultItem(title: "My Login", category: .login)
-        let payload1 = VaultItemPayload(username: "user@test.com")
-        XCTAssertEqual(item1.subtitlePreview(payload: payload1), "user@test.com")
+        let payload1 = VaultItemPayload(username: "user_test", email: "user@test.com")
+        XCTAssertEqual(item1.subtitlePreview(payload: payload1), "user_test (user@test.com)")
 
         let item2 = VaultItem(title: "Visa Card", category: .paymentCard)
         let payload2 = VaultItemPayload(cardNumber: "1234567890123456")
@@ -75,6 +91,10 @@ final class VaultItemModelTests: XCTestCase {
         let item3 = VaultItem(title: "AWS Key", category: .apiKey)
         let payload3 = VaultItemPayload(keyId: "AKIAIOSFODNN7EXAMPLE")
         XCTAssertEqual(item3.subtitlePreview(payload: payload3), "ID: AKIAIOSFODNN7EXAMPLE")
+
+        let itemDev = VaultItem(title: "Dev Server", category: .devCredential)
+        let payloadDev = VaultItemPayload(host: "192.168.1.50", port: "22")
+        XCTAssertEqual(itemDev.subtitlePreview(payload: payloadDev), "192.168.1.50:22")
 
         let item4 = VaultItem(title: "My Passport", category: .identity)
         let payload4 = VaultItemPayload(fullName: "John Doe")

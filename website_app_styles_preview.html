@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VaultMaster - 网站与应用新增/编辑页面 3 种风格设计方案</title>
+  <style>
+    :root {
+      --bg-body: #0d1117;
+      --bg-nav: #161b22;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      --accent: #388bfd;
+      --accent-hover: #58a6ff;
+      --border-color: #30363d;
+      --success: #3fb950;
+      --warning: #d29922;
+      --danger: #f85149;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: var(--bg-body);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 顶部控制栏 */
+    header {
+      background: var(--bg-nav);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-badge {
+      font-size: 11px;
+      background: rgba(56, 139, 253, 0.2);
+      color: var(--accent);
+      border: 1px solid rgba(56, 139, 253, 0.4);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .tab-group {
+      display: flex;
+      background: #0d1117;
+      border-radius: 8px;
+      padding: 3px;
+      border: 1px solid var(--border-color);
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(56, 139, 253, 0.4);
+    }
+
+    .mode-btn {
+      background: #21262d;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mode-btn:hover {
+      background: #30363d;
+    }
+
+    /* 主展示区 */
+    main {
+      flex: 1;
+      padding: 32px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .style-description-card {
+      background: rgba(22, 27, 34, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px 24px;
+      margin-bottom: 24px;
+    }
+
+    .style-description-card h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .style-description-card p {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .preview-container {
+      display: none;
+    }
+    .preview-container.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================ */
+    /* 风格 1: Apple 原生毛玻璃与分组卡片 (macOS Sequoia 极简风格) */
+    /* ============================================================ */
+    .style-apple {
+      background: #1c1c1e;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .apple-window-header {
+      background: rgba(44, 44, 46, 0.6);
+      backdrop-filter: blur(20px);
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .apple-window-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .apple-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-close { background: #ff5f56; }
+    .dot-min { background: #ffbd2e; }
+    .dot-max { background: #27c93f; }
+
+    .apple-window-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .apple-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .apple-btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #fff;
+      padding: 5px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .apple-btn-primary {
+      background: #007aff;
+      border: none;
+      color: #fff;
+      padding: 5px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .apple-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .apple-hero {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .apple-hero-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #007aff, #5856d6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+      flex-shrink: 0;
+    }
+
+    .apple-hero-meta {
+      flex: 1;
+    }
+
+    .apple-title-input {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 700;
+      width: 100%;
+      outline: none;
+      padding: 4px 0;
+      transition: border 0.2s;
+    }
+    .apple-title-input:focus {
+      border-bottom: 2px solid #007aff;
+    }
+
+    .apple-meta-pills {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .apple-pill {
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* 苹果卡片容器 */
+    .apple-card {
+      background: rgba(44, 44, 46, 0.7);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .apple-card-header {
+      padding: 10px 16px 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: rgba(235, 235, 245, 0.5);
+    }
+
+    .apple-row {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+    }
+    .apple-row:last-child {
+      border-bottom: none;
+    }
+
+    .apple-label {
+      width: 110px;
+      font-size: 13.5px;
+      color: rgba(235, 235, 245, 0.6);
+      font-weight: 500;
+    }
+
+    .apple-input-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .apple-input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      width: 100%;
+      outline: none;
+    }
+    .apple-input::placeholder {
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .apple-icon-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s;
+    }
+    .apple-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    /* 密码强度条 */
+    .apple-strength-bar-wrap {
+      padding: 4px 16px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .apple-strength-bar {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .apple-strength-fill {
+      height: 100%;
+      width: 85%;
+      background: linear-gradient(90deg, #30d158, #34c759);
+      border-radius: 2px;
+    }
+    .apple-strength-text {
+      font-size: 11px;
+      color: #34c759;
+      font-weight: 600;
+    }
+
+    /* TOTP 苹果卡片 */
+    .apple-totp-display {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .apple-totp-digits {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #007aff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    }
+    .apple-totp-timer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .apple-circle-timer {
+      width: 24px;
+      height: 24px;
+      position: relative;
+    }
+
+
+    /* ============================================================ */
+    /* 风格 2: 1Password 8 / Dashlane 专业安全中枢双栏风 (Pro Security Hub) */
+    /* ============================================================ */
+    .style-pro {
+      background: #191c24;
+      border-radius: 14px;
+      border: 1px solid #2e3440;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .pro-security-banner {
+      background: linear-gradient(90deg, rgba(63, 185, 80, 0.15), rgba(56, 139, 253, 0.1));
+      border-bottom: 1px solid rgba(63, 185, 80, 0.25);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+    .pro-security-score {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #3fb950;
+    }
+    .pro-security-tags {
+      display: flex;
+      gap: 6px;
+    }
+    .pro-sec-badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #8b949e;
+      font-weight: 500;
+    }
+    .pro-sec-badge.good {
+      background: rgba(63, 185, 80, 0.2);
+      color: #3fb950;
+    }
+
+    .pro-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 20px;
+      padding: 24px;
+    }
+
+    .pro-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pro-field-group {
+      background: #222733;
+      border: 1px solid #2e3547;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    .pro-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #8b949e;
+      margin-bottom: 6px;
+    }
+
+    .pro-input {
+      width: 100%;
+      background: #191c24;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 8px 12px;
+      color: #f0f6fc;
+      font-size: 13.5px;
+      outline: none;
+      transition: border 0.15s;
+    }
+    .pro-input:focus {
+      border-color: #388bfd;
+    }
+
+    .pro-entropy-box {
+      margin-top: 8px;
+      background: #191c24;
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .pro-totp-card {
+      background: #191c24;
+      border: 1px dashed #388bfd;
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pro-totp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #58a6ff;
+      font-weight: 600;
+    }
+
+    .pro-totp-val {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      color: #f0f6fc;
+      font-family: ui-monospace, SFMono-Regular, monospace;
+    }
+
+    .pro-audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 12.5px;
+      color: #8b949e;
+    }
+    .pro-audit-item {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #2e3547;
+    }
+
+    /* ============================================================ */
+    /* 风格 3: Linear / Raycast 现代极简暗黑工程风 (Precision Minimalist) */
+    /* ============================================================ */
+    .style-linear {
+      background: #000000;
+      border-radius: 12px;
+      border: 1px solid #222222;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      max-width: 760px;
+      margin: 0 auto;
+      overflow: hidden;
+      font-family: ui-monospace, "SF Mono", Menlo, Monaco, monospace, sans-serif;
+    }
+
+    .linear-topbar {
+      background: #080808;
+      border-bottom: 1px solid #1c1c1c;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .linear-pulse-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #aaa;
+    }
+    .linear-pulse-dot {
+      width: 7px;
+      height: 7px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    .linear-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .linear-field-row {
+      background: #0c0c0e;
+      border: 1px solid #1f1f23;
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.15s;
+    }
+    .linear-field-row:focus-within {
+      border-color: #5b5b66;
+    }
+
+    .linear-row-label {
+      width: 100px;
+      font-size: 12px;
+      color: #71717a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .linear-row-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #e4e4e7;
+      font-size: 13.5px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .linear-shortcut-tag {
+      font-size: 10.5px;
+      background: #18181b;
+      color: #a1a1aa;
+      border: 1px solid #27272a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      margin-left: 8px;
+    }
+
+    .linear-totp-row {
+      background: linear-gradient(90deg, #0e1217, #0c0c0e);
+      border: 1px solid #27272a;
+      border-left: 3px solid #38bdf8;
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .linear-totp-val {
+      font-size: 24px;
+      font-weight: 700;
+      color: #38bdf8;
+      letter-spacing: 3px;
+    }
+
+    .linear-btn-action {
+      background: #18181b;
+      border: 1px solid #27272a;
+      color: #e4e4e7;
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .linear-btn-action:hover {
+      background: #27272a;
+      border-color: #3f3f46;
+    }
+
+    /* 底部选择建议与特性对比表 */
+    .comparison-section {
+      margin-top: 48px;
+      background: #161b22;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .comparison-section h3 {
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+      background: #0d1117;
+    }
+
+    .tag-highlight {
+      background: rgba(56, 139, 253, 0.15);
+      color: #58a6ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-title">
+      <span>VaultMaster</span>
+      <span class="brand-badge">样式方案评估</span>
+    </div>
+
+    <div class="controls">
+      <div class="tab-group">
+        <button class="tab-btn active" onclick="switchStyle('apple')">风格 1: Apple 原生毛玻璃卡片</button>
+        <button class="tab-btn" onclick="switchStyle('pro')">风格 2: 1Password 专业安全中枢</button>
+        <button class="tab-btn" onclick="switchStyle('linear')">风格 3: Linear 极简暗黑工程</button>
+      </div>
+
+      <button class="mode-btn" id="mode-toggle-btn" onclick="toggleEditMode()">
+        <span id="mode-icon">✏️</span>
+        <span id="mode-text">切换为：新建模式</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========================================== -->
+    <!-- 方案 1: Apple 原生毛玻璃分组卡片 -->
+    <!-- ========================================== -->
+    <div id="preview-apple" class="preview-container active">
+      <div class="style-description-card">
+        <h2>🍎 风格 1：Apple 原生毛玻璃与分组卡片 (macOS Sequoia / Apple Passwords)</h2>
+        <p><strong>设计理念：</strong>遵循 Apple 官方 Human Interface Guidelines，采用精致的半透明卡片与内凹分区。层级清晰、呼吸感充足，天然契合 macOS 用户习惯，适合追求优雅、轻量原生体验的场景。</p>
+      </div>
+
+      <div class="style-apple">
+        <div class="apple-window-header">
+          <div class="apple-window-dots">
+            <div class="apple-dot dot-close"></div>
+            <div class="apple-dot dot-min"></div>
+            <div class="apple-dot dot-max"></div>
+          </div>
+          <div class="apple-window-title" id="apple-win-title">编辑网站与应用资产</div>
+          <div class="apple-actions">
+            <button class="apple-btn-secondary">取消</button>
+            <button class="apple-btn-primary">保存</button>
+          </div>
+        </div>
+
+        <div class="apple-body">
+          <!-- 头部信息 -->
+          <div class="apple-hero">
+            <div class="apple-hero-icon" id="apple-favicon">🌐</div>
+            <div class="apple-hero-meta">
+              <input type="text" class="apple-title-input" id="apple-title" value="GitHub 个人账号" placeholder="输入网站或应用名称">
+              <div class="apple-meta-pills">
+                <span class="apple-pill">📁 个人常用</span>
+                <span class="apple-pill">🏷️ 开发者</span>
+                <span class="apple-pill">🌐 网站/应用</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片 1: 账号与密码 -->
+          <div class="apple-card">
+            <div class="apple-card-header">账号与密码 (Account & Password)</div>
+            <div class="apple-row">
+              <div class="apple-label">用户名 / 账号</div>
+              <div class="apple-input-wrapper">
+                <input type="text" class="apple-input" value="octocat@github.com" placeholder="用户名或常用邮箱">
+                <button class="apple-icon-btn" onclick="copyText('octocat@github.com')">复制</button>
+              </div>
+            </div>
+            <div class="apple-row">
+              <div class="apple-label">登录密码</div>
+              <div class="apple-input-wrapper">
+                <input type="password" id="apple-pwd-input" class="apple-input" value="k9#Vp9$xL2!zM8@q" placeholder="输入或生成密码">
+                <button class="apple-icon-btn" onclick="toggleApplePwd()">👁️ 显隐</button>
+                <button class="apple-icon-btn" onclick="generateRandomPassword('apple-pwd-input')">⚡ 强密码</button>
+              </div>
+            </div>
+            <div class="apple-strength-bar-wrap">
+              <div class="apple-strength-bar">
+                <div class="apple-strength-fill" id="apple-strength-bar"></div>
+              </div>
+              <span class="apple-strength-text" id="apple-strength-lbl">极强密码 (128-bit)</span>
+            </div>
+          </div>
+
+          <!-- 卡片 2: 网址与快捷打开 -->
+          <div class="apple-card">
+            <div class="apple-card-header">关联网址 (Web Addresses)</div>
+            <div class="apple-row">
+              <div class="apple-label">网址 URL</div>
+              <div class="apple-input-wrapper">
+                <input type="text" class="apple-input" value="https://github.com/login" placeholder="https://example.com">
+                <button class="apple-icon-btn" onclick="window.open('https://github.com', '_blank')">↗️ 打开</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片 3: 双重认证 TOTP -->
+          <div class="apple-card">
+            <div class="apple-card-header">双重认证 (Two-Factor Authentication)</div>
+            <div class="apple-row">
+              <div class="apple-totp-display">
+                <div>
+                  <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 2px;">动态验证码</div>
+                  <div class="apple-totp-digits" id="apple-totp-code">482 910</div>
+                </div>
+                <div class="apple-totp-timer">
+                  <span style="font-size: 12px; color: rgba(255,255,255,0.6);" id="apple-countdown">23s</span>
+                  <button class="apple-icon-btn" onclick="copyText('482910')">📋 复制验证码</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片 4: 备注与自定义 -->
+          <div class="apple-card">
+            <div class="apple-card-header">备注信息 (Secure Notes)</div>
+            <div class="apple-row">
+              <div class="apple-input-wrapper">
+                <textarea class="apple-input" rows="2" style="resize:none; padding:4px 0;" placeholder="添加只有你能看到的加密备注...">包含个人 SSH Key 与 Copilot 订阅授权。</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 方案 2: 1Password 8 专业安全中枢风 -->
+    <!-- ========================================== -->
+    <div id="preview-pro" class="preview-container">
+      <div class="style-description-card">
+        <h2>🛡️ 风格 2：1Password 8 / Dashlane 专业安全中枢 (Pro Security Hub)</h2>
+        <p><strong>设计理念：</strong>双栏模块化结构 + 顶部安全审计条。将凭据信息与安全评分、防钓鱼域名规则、泄露风险监测无缝结合，适合专业开发者与企业级安全管理。</p>
+      </div>
+
+      <div class="style-pro">
+        <div class="pro-security-banner">
+          <div class="pro-security-score">
+            <span>🛡️ 安全健康度: 98% (极佳)</span>
+          </div>
+          <div class="pro-security-tags">
+            <span class="pro-sec-badge good">✓ 无已知泄露</span>
+            <span class="pro-sec-badge good">✓ 密码独立无重复</span>
+            <span class="pro-sec-badge good">✓ 2FA 已就绪</span>
+          </div>
+        </div>
+
+        <div class="pro-layout">
+          <!-- 左栏：核心凭据录入 -->
+          <div>
+            <div class="pro-section-title">
+              <span>凭据核心信息</span>
+              <span style="color:#58a6ff; font-size:11px; cursor:pointer;">历史版本 (3)</span>
+            </div>
+
+            <div class="pro-field-group">
+              <div class="pro-label">资产标题</div>
+              <input type="text" class="pro-input" value="AWS 生产环境控制台 (Root)" style="font-weight:600; margin-bottom:12px;">
+
+              <div class="pro-label">用户名 / 邮箱</div>
+              <input type="text" class="pro-input" value="aws-admin@company.com" style="margin-bottom:12px;">
+
+              <div class="pro-label">密码</div>
+              <div style="display:flex; gap:8px;">
+                <input type="password" id="pro-pwd-input" class="pro-input" value="d9$Lm#81@XzPqW210_v!">
+                <button class="apple-icon-btn" onclick="toggleProPwd()">显隐</button>
+                <button class="apple-icon-btn" onclick="generateRandomPassword('pro-pwd-input')">⚡ 轮换</button>
+              </div>
+
+              <div class="pro-entropy-box">
+                <span style="color:#3fb950;">● 密码熵值: 92 bits (不可被暴力破解)</span>
+                <span style="color:#8b949e;">上次修改: 12天前</span>
+              </div>
+            </div>
+
+            <!-- TOTP 区域 -->
+            <div class="pro-totp-card">
+              <div class="pro-totp-header">
+                <span>🔐 TOTP 动态双重验证码</span>
+                <span id="pro-countdown" style="color:#d29922;">⏳ 18秒后刷新</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="pro-totp-val" id="pro-totp-code">819 402</div>
+                <button class="apple-icon-btn" style="background:#238636; color:#fff;" onclick="copyText('819402')">一键填充/复制</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右栏：安全审计、自动填充规则、归类 -->
+          <div>
+            <div class="pro-section-title">
+              <span>关联规则与属性</span>
+            </div>
+
+            <div class="pro-field-group">
+              <div class="pro-label">自动填充匹配网址 (Autofill URL)</div>
+              <input type="text" class="pro-input" value="https://signin.aws.amazon.com" style="margin-bottom:8px;">
+              <div style="font-size:11px; color:#8b949e;">防钓鱼保护：仅在与以上域名精确匹配时提示填充</div>
+            </div>
+
+            <div class="pro-field-group">
+              <div class="pro-label">分类与所属文件夹</div>
+              <div style="display:flex; gap:8px; margin-bottom:10px;">
+                <select class="pro-input" style="flex:1;">
+                  <option>📁 云架构团队</option>
+                  <option>📁 个人私有</option>
+                </select>
+              </div>
+              <div class="pro-label">安全标签 (Tags)</div>
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <span class="pro-sec-badge" style="background:#1f6feb; color:#fff;">AWS</span>
+                <span class="pro-sec-badge" style="background:#8957e5; color:#fff;">Production</span>
+                <span class="pro-sec-badge" style="cursor:pointer;">+ 添加</span>
+              </div>
+            </div>
+
+            <div class="pro-field-group">
+              <div class="pro-label">安全审计日志</div>
+              <div class="pro-audit-list">
+                <div class="pro-audit-item">
+                  <span>创建时间</span>
+                  <span>2024-03-15</span>
+                </div>
+                <div class="pro-audit-item">
+                  <span>最后使用</span>
+                  <span>今日 14:22 (macOS Safari)</span>
+                </div>
+                <div class="pro-audit-item" style="border:none;">
+                  <span>加密状态</span>
+                  <span style="color:#3fb950;">AES-256-GCM 锁定</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 方案 3: Linear / Raycast 现代极简暗黑工程风 -->
+    <!-- ========================================== -->
+    <div id="preview-linear" class="preview-container">
+      <div class="style-description-card">
+        <h2>⚡ 风格 3：Linear / Raycast 现代极简暗黑工程风 (Precision Minimalist)</h2>
+        <p><strong>设计理念：</strong>超高信息密度、全键盘操作流、纯黑底色与细边框。没有多余的卡片套娃，每一行均为即时可编辑单元，右侧配备快捷键提示，深受极客与高阶开发者的喜爱。</p>
+      </div>
+
+      <div class="style-linear">
+        <div class="linear-topbar">
+          <div class="linear-pulse-status">
+            <div class="linear-pulse-dot"></div>
+            <span>VAULT_ITEM: LOGIN_CREDENTIAL</span>
+          </div>
+          <div>
+            <span>快捷键导航已激活: <span class="linear-shortcut-tag">Tab</span> 下一项 <span class="linear-shortcut-tag">⌘S</span> 保存</span>
+          </div>
+        </div>
+
+        <div class="linear-body">
+          <div class="linear-field-row">
+            <div class="linear-row-label">Title</div>
+            <input type="text" class="linear-row-input" value="Vercel Cloud Deployment" placeholder="资产标题">
+            <span class="linear-shortcut-tag">⌘1</span>
+          </div>
+
+          <div class="linear-field-row">
+            <div class="linear-row-label">Username</div>
+            <input type="text" class="linear-row-input" value="dev-lead@vercel.com" placeholder="用户名/邮箱">
+            <button class="linear-btn-action" onclick="copyText('dev-lead@vercel.com')">Copy</button>
+            <span class="linear-shortcut-tag">⌘C</span>
+          </div>
+
+          <div class="linear-field-row">
+            <div class="linear-row-label">Password</div>
+            <input type="password" id="linear-pwd-input" class="linear-row-input" value="v9#xP8*L2024$Secure">
+            <button class="linear-btn-action" onclick="toggleLinearPwd()">Show</button>
+            <button class="linear-btn-action" onclick="generateRandomPassword('linear-pwd-input')">Gen</button>
+            <span class="linear-shortcut-tag">⌘P</span>
+          </div>
+
+          <div class="linear-totp-row">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="color:#71717a; font-size:12px;">TOTP 2FA</span>
+              <div class="linear-totp-val" id="linear-totp-code">592 108</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:11px; color:#10b981;" id="linear-countdown">28s</span>
+              <button class="linear-btn-action" style="border-color:#38bdf8; color:#38bdf8;" onclick="copyText('592108')">Copy 2FA</button>
+              <span class="linear-shortcut-tag">⌘G</span>
+            </div>
+          </div>
+
+          <div class="linear-field-row">
+            <div class="linear-row-label">URL</div>
+            <input type="text" class="linear-row-input" value="https://vercel.com/login" placeholder="https://...">
+            <button class="linear-btn-action" onclick="window.open('https://vercel.com', '_blank')">Visit</button>
+            <span class="linear-shortcut-tag">⌘L</span>
+          </div>
+
+          <div class="linear-field-row">
+            <div class="linear-row-label">Tags</div>
+            <input type="text" class="linear-row-input" value="infra, frontend, ci-cd" placeholder="逗号分隔标签">
+            <span class="linear-shortcut-tag">⌘T</span>
+          </div>
+
+          <div class="linear-field-row" style="align-items:flex-start;">
+            <div class="linear-row-label" style="padding-top:4px;">Notes</div>
+            <textarea class="linear-row-input" rows="2" style="resize:none;">包含 Team Pro Plan 订阅，关联 GitHub 组织账号。</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 详细维度对比表与选型建议 -->
+    <!-- ========================================== -->
+    <div class="comparison-section">
+      <h3>📊 三种设计风格全方位对比与落地建议</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>风格方案</th>
+              <th>视觉特征</th>
+              <th>信息层级与优势</th>
+              <th>适用人群与场景</th>
+              <th>SwiftUI 改造复杂度</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>风格 1：Apple 原生卡片 (推荐)</strong></td>
+              <td>毛玻璃半透明背景、圆角卡片分区块、SF Symbols 精致图标</td>
+              <td>结构一目了然，将账号/密码、网址、2FA、便签自然分区，最贴合 macOS 体验</td>
+              <td>大众日常用户、追求 macOS 原生精致感与沉浸体验</td>
+              <td><span class="tag-highlight">中等 (最契合现有项目)</span></td>
+            </tr>
+            <tr>
+              <td><strong>风格 2：1Password 专业中枢</strong></td>
+              <td>双栏网格、顶部安全健康评分条、防钓鱼匹配、密码历史</td>
+              <td>信息密度最高，安全状态可视化，一眼看清安全审计与归类属性</td>
+              <td>重度安全管理、企业团队运维、需要管理数百个凭据的用户</td>
+              <td><span class="tag-highlight">较高 (需双栏网格布局)</span></td>
+            </tr>
+            <tr>
+              <td><strong>风格 3：Linear 极简暗黑</strong></td>
+              <td>纯黑沉浸式底色、等宽代码字体、极简边框、全快捷键支持</td>
+              <td>操作速度最快，无视觉干扰，单手键盘流快捷复制与生成</td>
+              <td>程序员、极客、效率工具重度用户</td>
+              <td><span class="tag-highlight">低 (行内组件化)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // 风格切换逻辑
+    function switchStyle(styleName) {
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      document.querySelectorAll('.preview-container').forEach(c => c.classList.remove('active'));
+      document.getElementById('preview-' + styleName).classList.add('active');
+    }
+
+    // 新增 / 编辑模式切换模拟
+    let isCreateMode = false;
+    function toggleEditMode() {
+      isCreateMode = !isCreateMode;
+      const modeText = document.getElementById('mode-text');
+      const winTitle = document.getElementById('apple-win-title');
+
+      if (isCreateMode) {
+        modeText.innerText = "切换为：编辑模式";
+        winTitle.innerText = "新建网站与应用资产 (未保存)";
+        document.getElementById('apple-title').value = "";
+        document.getElementById('apple-title').placeholder = "请输入网站或应用标题...";
+      } else {
+        modeText.innerText = "切换为：新建模式";
+        winTitle.innerText = "编辑网站与应用资产";
+        document.getElementById('apple-title').value = "GitHub 个人账号";
+      }
+    }
+
+    // 显隐密码
+    function toggleApplePwd() {
+      const inp = document.getElementById('apple-pwd-input');
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+    }
+    function toggleProPwd() {
+      const inp = document.getElementById('pro-pwd-input');
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+    }
+    function toggleLinearPwd() {
+      const inp = document.getElementById('linear-pwd-input');
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+    }
+
+    // 随机强密码生成器
+    function generateRandomPassword(elementId) {
+      const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+";
+      let pwd = "";
+      for (let i = 0; i < 18; i++) {
+        pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      document.getElementById(elementId).value = pwd;
+      alert("已生成 18 位高强度随机密码！");
+    }
+
+    // 复制剪贴板
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("已复制到剪贴板: " + text);
+      }).catch(() => {
+        alert("已复制: " + text);
+      });
+    }
+
+    // 动态模拟 30 秒 TOTP 倒计时
+    let countdown = 30;
+    setInterval(() => {
+      countdown--;
+      if (countdown <= 0) {
+        countdown = 30;
+        const newCode = Math.floor(100000 + Math.random() * 900000).toString();
+        const formatted = newCode.slice(0, 3) + " " + newCode.slice(3);
+        document.getElementById('apple-totp-code').innerText = formatted;
+        document.getElementById('pro-totp-code').innerText = formatted;
+        document.getElementById('linear-totp-code').innerText = formatted;
+      }
+      document.getElementById('apple-countdown').innerText = countdown + "s";
+      document.getElementById('pro-countdown').innerText = "⏳ " + countdown + "秒后刷新";
+      document.getElementById('linear-countdown').innerText = countdown + "s";
+    }, 1000);
+  </script>
+</body>
+</html>

@@ -5,6 +5,7 @@ import SwiftUI
 public enum ItemCategory: String, Codable, CaseIterable, Identifiable, Sendable {
     case login = "login"
     case apiKey = "apiKey"
+    case devCredential = "devCredential"
     case paymentCard = "paymentCard"
     case identity = "identity"
     case secureNote = "secureNote"
@@ -15,9 +16,11 @@ public enum ItemCategory: String, Codable, CaseIterable, Identifiable, Sendable 
     public var displayName: String {
         switch self {
         case .login:
-            return "网站与应用登录"
+            return "网站与应用"
         case .apiKey:
-            return "API Key 与开发凭据"
+            return "API Key"
+        case .devCredential:
+            return "开发凭据"
         case .paymentCard:
             return "银行卡与支付资产"
         case .identity:
@@ -30,8 +33,9 @@ public enum ItemCategory: String, Codable, CaseIterable, Identifiable, Sendable 
     /// 简短名称
     public var shortName: String {
         switch self {
-        case .login: return "登录"
+        case .login: return "网站/应用"
         case .apiKey: return "API Key"
+        case .devCredential: return "开发凭据"
         case .paymentCard: return "银行卡"
         case .identity: return "证件"
         case .secureNote: return "便签"
@@ -45,6 +49,8 @@ public enum ItemCategory: String, Codable, CaseIterable, Identifiable, Sendable 
             return "globe"
         case .apiKey:
             return "key.fill"
+        case .devCredential:
+            return "terminal.fill"
         case .paymentCard:
             return "creditcard.fill"
         case .identity:
@@ -61,6 +67,8 @@ public enum ItemCategory: String, Codable, CaseIterable, Identifiable, Sendable 
             return .blue
         case .apiKey:
             return .orange
+        case .devCredential:
+            return .indigo
         case .paymentCard:
             return .green
         case .identity:
