@@ -5,6 +5,7 @@ public struct ItemListView: View {
     @ObservedObject var appState: AppState
     @ObservedObject var vaultVM: VaultViewModel
     @State private var showingTrashConfirm: Bool = false
+    @State private var itemPendingDelete: VaultItem? = nil
 
     public init(appState: AppState, vaultVM: VaultViewModel) {
         self.appState = appState
@@ -83,6 +84,7 @@ public struct ItemListView: View {
                 .keyboardShortcut("n", modifiers: .command)
             }
         }
+        // 清空废纸篓确认弹窗
         .alert("确定要清空废纸篓吗？", isPresented: $showingTrashConfirm) {
             Button("取消", role: .cancel) {}
             Button("清空", role: .destructive) {
@@ -90,6 +92,35 @@ public struct ItemListView: View {
             }
         } message: {
             Text("清空后废纸篓中的所有项目将被永久删除，不可恢复。")
+        }
+        // 列表右键删除确认弹窗
+        .alert(
+            itemPendingDelete?.isTrash == true ? "确定要永久删除此项目吗？" : "确定要将此项目移至废纸篓吗？",
+            isPresented: Binding(
+                get: { itemPendingDelete != nil },
+                set: { if !$0 { itemPendingDelete = nil } }
+            )
+        ) {
+            Button("取消", role: .cancel) {
+                itemPendingDelete = nil
+            }
+            Button(itemPendingDelete?.isTrash == true ? "永久删除" : "移至废纸篓", role: .destructive) {
+                if let target = itemPendingDelete {
+                    if appState.selectedItemId == target.id {
+                        appState.selectedItemId = nil
+                    }
+                    vaultVM.deleteItem(target)
+                    itemPendingDelete = nil
+                }
+            }
+        } message: {
+            if let target = itemPendingDelete {
+                if target.isTrash {
+                    Text("此操作将永久抹除「\(target.title)」的所有数据，不可恢复。")
+                } else {
+                    Text("项目「\(target.title)」将被移至废纸篓，您可以随时在废纸篓中还原或彻底清空。")
+                }
+            }
         }
     }
 
@@ -151,7 +182,7 @@ public struct ItemListView: View {
             }
 
             Button(role: .destructive) {
-                vaultVM.deleteItem(item)
+                itemPendingDelete = item
             } label: {
                 Label("永久删除", systemImage: "trash.slash.fill")
             }
@@ -202,7 +233,7 @@ public struct ItemListView: View {
 
             // 删除
             Button(role: .destructive) {
-                vaultVM.deleteItem(item)
+                itemPendingDelete = item
             } label: {
                 Label("移至废纸篓", systemImage: "trash")
             }

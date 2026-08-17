@@ -11,6 +11,7 @@ public struct ItemDetailView: View {
     @State private var draftItem: VaultItem?
     @State private var draftPayload: VaultItemPayload = VaultItemPayload()
     @State private var showingPasswordGenerator: Bool = false
+    @State private var showingDeleteConfirm: Bool = false
     @FocusState private var isTitleFocused: Bool
 
     public init(itemId: UUID?, vaultVM: VaultViewModel, appState: AppState) {
@@ -233,14 +234,27 @@ public struct ItemDetailView: View {
                     .help("编辑资产")
 
                     Button(role: .destructive) {
-                        vaultVM.deleteItem(item)
-                        appState.selectedItemId = nil
+                        showingDeleteConfirm = true
                     } label: {
                         Image(systemName: "trash")
                             .foregroundColor(.red)
                     }
-                    .help("删除项目")
+                    .help(item.isTrash ? "永久删除此项目" : "移至废纸篓")
                 }
+            }
+        }
+        // 删除确认弹窗
+        .alert(item.isTrash ? "确定要永久删除此项目吗？" : "确定要将此项目移至废纸篓吗？", isPresented: $showingDeleteConfirm) {
+            Button("取消", role: .cancel) {}
+            Button(item.isTrash ? "永久删除" : "移至废纸篓", role: .destructive) {
+                vaultVM.deleteItem(item)
+                appState.selectedItemId = nil
+            }
+        } message: {
+            if item.isTrash {
+                Text("此操作将永久抹除「\(item.title)」的密文数据，不可恢复。")
+            } else {
+                Text("项目「\(item.title)」将被移至废纸篓，您可以随时在废纸篓中还原或彻底清空。")
             }
         }
     }
@@ -343,7 +357,7 @@ public struct ItemDetailView: View {
                 appState.startCreatingItem(category: .login)
             } label: {
                 Label("新建资产项目", systemImage: "plus.circle.fill")
-                    .font(.body)
+                    .font(.subheadline.bold())
             }
             .buttonStyle(.bordered)
             .padding(.top, 4)
@@ -390,20 +404,12 @@ public struct ItemDetailView: View {
         }
     }
 
-    // 2. API Key 专属字段
+    // 2. API Key 专属字段 (直接输入，不包含密码自动生成器)
     @ViewBuilder
     private var apiKeyFieldsView: some View {
         VStack(spacing: 14) {
             fieldRow(title: "Key ID / Client ID", value: $draftPayload.keyId, placeholder: "ak_live_xxxxxxxx")
-            ConcealedSecureField(
-                title: "Secret / API Key",
-                text: $draftPayload.apiKeySecret,
-                placeholder: "sk_live_xxxxxxxx",
-                isEditable: isEditing,
-                onGeneratePassword: {
-                    showingPasswordGenerator = true
-                }
-            )
+            fieldRow(title: "Secret / API Key", value: $draftPayload.apiKeySecret, placeholder: "sk_live_xxxxxxxx")
             fieldRow(title: "Endpoint API 接口地址", value: $draftPayload.endpoint, placeholder: "https://api.openai.com/v1", isUrl: true)
             fieldRow(title: "自定义 Header / 配置", value: $draftPayload.customHeaders, placeholder: "Bearer Token...")
             notesFieldView
