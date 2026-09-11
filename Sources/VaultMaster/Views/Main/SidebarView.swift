@@ -128,7 +128,7 @@ public struct SidebarView: View {
                             .frame(width: 16, height: 16)
                     }
                     .buttonStyle(.plain)
-                    .padding(.trailing, 6)
+                    .padding(.trailing, 14)
                     .help("新建文件夹")
                 }
             }
@@ -172,7 +172,7 @@ public struct SidebarView: View {
                             .frame(width: 16, height: 16)
                     }
                     .buttonStyle(.plain)
-                    .padding(.trailing, 6)
+                    .padding(.trailing, 14)
                     .help("新建标签")
                 }
             }
