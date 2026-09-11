@@ -89,6 +89,8 @@ VaultMaster/
 
 ## 🚀 编译与运行指南
 
+向最终用户分发时，请同时提供 [安装指南](INSTALL.md)。维护者制作签名、公证发行包时参阅 [发布指南](DISTRIBUTION.md)。
+
 ### 1. 运行单元测试
 ```bash
 swift test
@@ -110,6 +112,64 @@ swift build -c release
 open Package.swift
 ```
 Xcode 将自动识别并加载所有 SwiftUI 预览、Assets 与完整 macOS Target。
+
+---
+
+## 📦 打包与安装
+
+### 1. 准备环境并测试
+
+打包需要安装完整 Xcode，并将其设为当前开发工具目录（可用 `xcode-select -p` 检查），首次启动 Xcode 时完成组件安装。以下命令均在仓库根目录执行。修改完成后先运行测试：
+
+```bash
+swift test
+```
+
+### 2. 一键生成 DMG
+
+```bash
+VERSION=0.1.3 BUILD_NUMBER=4 ./script/package_dmg.sh
+```
+
+`0.1.3` 和 `4` 仅为示例；发布时指定实际版本号，并递增构建号。脚本会自动完成 Release 构建（Apple Silicon / Intel 通用架构）、图标编译、应用签名和安装包校验，无须提前手动编译。`swift build -c release` 只编译程序，不生成安装包。
+
+产物位于 `dist/`：
+
+- `VaultMaster-0.1.3-macOS-universal.dmg`：支持拖动安装的磁盘映像。
+- `VaultMaster-0.1.3-macOS-universal.zip`：备用压缩包。
+- 对应的 `.dmg.sha256`、`.zip.sha256`：校验文件。
+- `VaultMaster.app` 和 `VaultMaster-0.1.3-安装说明.md`：应用及安装说明。
+
+每次打包会替换 `dist/VaultMaster.app`；同版本打包会覆盖同名产物，即使构建号不同。需要保留旧包时，请提前另存。
+
+### 3. 校验与拖动安装
+
+在仓库根目录执行以下命令，输出 `OK` 表示校验通过（使用子 shell，不改变当前目录）：
+
+```bash
+(cd dist && shasum -a 256 -c VaultMaster-0.1.3-macOS-universal.dmg.sha256)
+```
+
+1. 退出正在运行的旧版 VaultMaster。
+2. 双击 `dist/VaultMaster-0.1.3-macOS-universal.dmg`。
+3. 将 VaultMaster 拖入磁盘映像中的 Applications 文件夹；更新时选择替换。
+4. 推出磁盘映像，再从“应用程序”启动 VaultMaster。
+
+安装包不包含个人金库数据，替换应用不会删除已有金库。系统要求为 macOS 14 或更高版本；首次启动与安全提示处理见 [安装指南](INSTALL.md)。
+
+### 4. 正式签名与公证分发
+
+未设置签名环境变量时，脚本默认生成 ad-hoc 临时签名测试包，未经 Apple 公证，其他 Mac 可能显示安全提示。正式对外分发前，安装 Developer ID Application 证书并配置钥匙串公证凭据，然后执行：
+
+```bash
+VERSION=0.1.3 \
+BUILD_NUMBER=4 \
+DEVELOPER_ID_APPLICATION="Developer ID Application: Name (TEAM_ID)" \
+NOTARY_PROFILE="VaultMaster-notary" \
+./script/package_dmg.sh
+```
+
+将证书名称和公证配置名称替换为实际值。脚本会对应用启用 Hardened Runtime 签名，通过 ZIP 提交公证并装订应用票据，验证后再生成包含该应用的 DMG。凭据配置与发布检查见 [发布指南](DISTRIBUTION.md)；不要将密码或证书提交到仓库。
 
 ---
 

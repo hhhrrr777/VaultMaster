@@ -124,8 +124,11 @@ public struct SidebarView: View {
                     } label: {
                         Image(systemName: "plus")
                             .font(.caption)
+                            .foregroundColor(.secondary)
+                            .frame(width: 16, height: 16)
                     }
                     .buttonStyle(.plain)
+                    .padding(.trailing, 6)
                     .help("新建文件夹")
                 }
             }
@@ -165,8 +168,11 @@ public struct SidebarView: View {
                     } label: {
                         Image(systemName: "plus")
                             .font(.caption)
+                            .foregroundColor(.secondary)
+                            .frame(width: 16, height: 16)
                     }
                     .buttonStyle(.plain)
+                    .padding(.trailing, 6)
                     .help("新建标签")
                 }
             }
@@ -270,6 +276,7 @@ public struct SidebarView: View {
                     Image(systemName: "gearshape.fill")
                         .font(.caption)
                         .foregroundColor(.secondary)
+                        .frame(width: 16, height: 16)
                 }
                 .buttonStyle(.plain)
                 .help("安全与系统设置")

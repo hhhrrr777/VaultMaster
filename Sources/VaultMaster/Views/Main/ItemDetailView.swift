@@ -129,7 +129,7 @@ public struct ItemDetailView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    TextField(appState.creatingCategory == .login ? "输入网站或应用名称 (如: GitHub / Google / ChatGPT)" : "输入资产标题 (如: 个人邮箱 / 公司服务器 / 招行信用卡)", text: Binding(
+                    TextField("输入\(appState.creatingCategory.displayName)名称", text: Binding(
                         get: { draftItem?.title ?? "" },
                         set: { draftItem?.title = $0 }
                     ))

@@ -19,6 +19,7 @@ Package.pins
 .swiftpm/xcode/package.xcworkspace/xcuserdata/
 .swiftpm/configuration/
 .swiftpm/
+dist/
 
 # macOS Finder / System Files
 #

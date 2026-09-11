@@ -16,24 +16,24 @@ public enum ItemCategory: String, Codable, CaseIterable, Identifiable, Sendable 
     public var displayName: String {
         switch self {
         case .login:
-            return "网站与应用"
+            return "网站应用"
         case .apiKey:
             return "API Key"
         case .devCredential:
             return "开发凭据"
         case .paymentCard:
-            return "银行卡与支付资产"
+            return "银行卡"
         case .identity:
-            return "个人证件与身份信息"
+            return "证件"
         case .secureNote:
-            return "安全便签"
+            return "便签"
         }
     }
 
     /// 简短名称
     public var shortName: String {
         switch self {
-        case .login: return "网站/应用"
+        case .login: return "网站应用"
         case .apiKey: return "API Key"
         case .devCredential: return "开发凭据"
         case .paymentCard: return "银行卡"
