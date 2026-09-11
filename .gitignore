@@ -21,6 +21,10 @@ Package.pins
 .swiftpm/
 dist/
 
+# Codex / local agent workspace files
+.codex/
+AGENTS.md
+
 # macOS Finder / System Files
 #
 .DS_Store
